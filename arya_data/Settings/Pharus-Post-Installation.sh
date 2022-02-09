@@ -122,3 +122,23 @@ sudo systemctl daemon-reload
 sudo systemctl enable oxidized.service
 sudo systemctl start oxidized.service
 
+#while :
+#do
+#echo -n "Notification Email : "
+#read -e Email
+#echo -n "Email Password : "
+#read -e mailpass
+#echo -n "Configure above Information (y/Y yes) : "
+#read -e VAR1
+  #if [ "$VAR1" == "y" ] || [ "$VAR1" == "Y" ]; then
+    #break
+  #fi
+#done
+
+#echo "-----------------------------------------------------"
+#echo "Email : $Email"
+#echo "Email Password : $mailpass"
+#echo "-----------------------------------------------------"
+#echo "The above information will be used ..."
+#sed -i "s|\['email_smtp_username'\].*|\['email_smtp_username'\] = 'bilgilendirme@arya-it.com';|" /opt/pharus/config.php
+#sed -i "s|\['email_smtp_password'\].*|\['email_smtp_password'\] = 'Volcano7854';|" /opt/pharus/config.php
