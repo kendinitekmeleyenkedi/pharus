@@ -13,20 +13,22 @@ cd /opt
 rm -rf /etc/resolv.conf
 echo nameserver 8.8.8.8 >> /etc/resolv.conf
 git clone https://github.com/kendinitekmeleyenkedi/pharus
-#echo 91.230.149.163 pharus.arya-it.com >> /etc/hosts
-#wget https://pharus.arya-it.com/config.txt -P /opt/pharus/ --no-check-certificate
 rm -rf /opt/pharus/config.php
 cp /opt/pharus/arya_data/Settings/config.php /opt/pharus/config.php
 chown pharus:pharus /opt/pharus/config.php
 
-### Random Password Generation
-randpw=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c8; echo "")
-echo $randpw > /root/randpw.txt
+### Password Generation
+#####randpw=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c8; echo "") ##1##
+#####echo $randpw > /root/randpw.txt ##2##
+echo Xqfa2tXQ > /root/randpw.txt ##2##
 sudo chown root:root /root/randpw.txt
 sudo chmod 700 /root/randpw.txt
-sed -i "s|CREATE USER 'pharus'@'localhost' IDENTIFIED BY.*|CREATE USER 'pharus'@'localhost' IDENTIFIED BY '$randpw';|" /opt/pharus/arya_data/Settings/mariadb/sql.sql
-sed -i "s|CREATE USER 'pharus'@'localhost' IDENTIFIED BY.*|CREATE USER 'pharus'@'localhost' IDENTIFIED BY '$randpw';|" /opt/pharus/arya_data/Settings/mariadb/sql1.sql
-sed -i "s|\['db_pass'\].*|\['db_pass'\] = '$randpw';|" /opt/pharus/config.php
+#####sed -i "s|CREATE USER 'pharus'@'localhost' IDENTIFIED BY.*|CREATE USER 'pharus'@'localhost' IDENTIFIED BY '$randpw';|" /opt/pharus/arya_data/Settings/mariadb/sql.sql ##3##
+#####sed -i "s|CREATE USER 'pharus'@'localhost' IDENTIFIED BY.*|CREATE USER 'pharus'@'localhost' IDENTIFIED BY '$randpw';|" /opt/pharus/arya_data/Settings/mariadb/sql1.sql ##4##
+sed -i "s|CREATE USER 'pharus'@'localhost' IDENTIFIED BY.*|CREATE USER 'pharus'@'localhost' IDENTIFIED BY 'Xqfa2tXQ';|" /opt/pharus/arya_data/Settings/mariadb/sql.sql ##3##
+sed -i "s|CREATE USER 'pharus'@'localhost' IDENTIFIED BY.*|CREATE USER 'pharus'@'localhost' IDENTIFIED BY 'Xqfa2tXQ';|" /opt/pharus/arya_data/Settings/mariadb/sql1.sql ##4##
+#####sed -i "s|\['db_pass'\].*|\['db_pass'\] = '$randpw';|" /opt/pharus/config.php ##5##
+sed -i "s|\['db_pass'\].*|\['db_pass'\] = 'Xqfa2tXQ';|" /opt/pharus/config.php ##5##
 sed -i "s|\['db_user'\].*|\['db_user'\] = 'pharus';|" /opt/pharus/config.php
 sed -i "s|\['db_name'\].*|\['db_name'\] = 'pharus';|" /opt/pharus/config.php
 
@@ -56,9 +58,12 @@ cat /opt/pharus/arya_data/Settings/mariadb/50-server.cnf >  /etc/mysql/mariadb.c
 
 systemctl enable mariadb
 systemctl start mariadb
-/usr/bin/mysqladmin -u root password "$randpw"
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p"$randpw" -Dmysql
-mysql -u root -p"$randpw" </opt/pharus/arya_data/Settings/mariadb/sql1.sql
+#####/usr/bin/mysqladmin -u root password "$randpw" ##6##
+#####mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p"$randpw" -Dmysql ##7##
+#####mysql -u root -p"$randpw" </opt/pharus/arya_data/Settings/mariadb/sql1.sql ##8##
+/usr/bin/mysqladmin -u root password "Xqfa2tXQ" ##6##
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p"Xqfa2tXQ" -Dmysql ##7##
+mysql -u root -p"Xqfa2tXQ" </opt/pharus/arya_data/Settings/mariadb/sql1.sql ##8##
 
 cp /etc/php/7.4/fpm/pool.d/www.conf /etc/php/7.4/fpm/pool.d/pharusnms.conf
 cat /opt/pharus/arya_data/Settings/fpm/pharus.conf > /etc/php/7.4/fpm/pool.d/pharusnms.conf
@@ -83,7 +88,8 @@ sudo -u pharus bash << EOF
 ./adduser.php admin password 10
 EOF
 
-mysql -u pharus -p"$randpw" </opt/pharus/arya_data/Settings/mariadb/sql2.sql
+#####mysql -u pharus -p"$randpw" </opt/pharus/arya_data/Settings/mariadb/sql2.sql ##9##
+mysql -u pharus -p"Xqfa2tXQ" </opt/pharus/arya_data/Settings/mariadb/sql2.sql ##9##
 
 sudo cp /opt/pharus/misc/lnms-completion.bash /etc/bash_completion.d/
 
@@ -114,10 +120,10 @@ chmod 755 /opt/pharus/html/ -R
 mkdir -p /opt/oxidized/output/
 
 ### Pharus-Post-Installer
+mkdir /opt/pharus/html/images/custom
 sudo bash /opt/pharus/arya_data/Settings/Pharus-Post-Installation.sh
 
 sleep 2m
-
 
 chown -R pharus:pharus /opt/pharus
 setfacl -d -m g::rwx /opt/pharus/rrd /opt/pharus/logs /opt/pharus/bootstrap/cache/ /opt/pharus/storage/
