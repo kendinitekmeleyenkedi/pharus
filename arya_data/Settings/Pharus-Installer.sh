@@ -12,10 +12,11 @@ useradd pharus -d /opt/pharus -M -r -s "$(which bash)"
 cd /opt
 rm -rf /etc/resolv.conf
 echo nameserver 8.8.8.8 >> /etc/resolv.conf
-echo 91.230.149.163 pharus.arya-it.com >> /etc/hosts
-git clone https://github.com/aryait/pharus
-wget https://pharus.arya-it.com/config.txt -P /opt/pharus/ --no-check-certificate
-mv /opt/pharus/config.txt /opt/pharus/config.php
+git clone https://github.com/kendinitekmeleyenkedi/pharus
+#echo 91.230.149.163 pharus.arya-it.com >> /etc/hosts
+#wget https://pharus.arya-it.com/config.txt -P /opt/pharus/ --no-check-certificate
+rm -rf /opt/pharus/config.php
+cp /opt/pharus/arya_data/Settings/config.php /opt/pharus/config.php
 chown pharus:pharus /opt/pharus/config.php
 
 ### Random Password Generation
@@ -52,13 +53,13 @@ echo "
 #  fi
 #done
 
-#echo "-----------------------------------------------------"
-#echo "Email : $Email"
-#echo "Email Password : $mailpass"
-#echo "-----------------------------------------------------"
-#echo "The above information will be used ..."
-sed -i "s|\['email_smtp_username'\].*|\['email_smtp_username'\] = 'bilgilendirme@arya-it.com';|" /opt/pharus/config.php
-sed -i "s|\['email_smtp_password'\].*|\['email_smtp_password'\] = 'Volcano7854';|" /opt/pharus/config.php
+echo "-----------------------------------------------------"
+echo "Email : $Email"
+echo "Email Password : $mailpass"
+echo "-----------------------------------------------------"
+echo "The above information will be used ..."
+sed -i "s|\['email_smtp_username'\].*|\['email_smtp_username'\] = '$Email';|" /opt/pharus/config.php
+sed -i "s|\['email_smtp_password'\].*|\['email_smtp_password'\] = '$mailpass';|" /opt/pharus/config.php
 
 
 ### Permission
