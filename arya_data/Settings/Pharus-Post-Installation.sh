@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # sudo bash Pharus-Post-Installation.php ile kullanılması gerek.
 echo "Pharus Post Installation ..."
 
@@ -15,7 +14,6 @@ HostIP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-
 
 # Nginx Confiğindeki 2. Satırın Regex için alınması.
 Nginx2ndln=$(cat /etc/hosts | sed -n 2p)
-
 
 while :
 do
