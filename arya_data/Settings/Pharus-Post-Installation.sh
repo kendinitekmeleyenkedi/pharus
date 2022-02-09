@@ -21,7 +21,16 @@ echo -n "NginxURL : "
 read -e NginxURL
 echo -n "SNMPLocation : "
 read -e SNMPLocation
-echo -e "-----------------------------------------------------\nNginxURL : $NginxURL\nSNMPLocation : $SNMPLocation\n-----------------------------------------------------"
+echo -n "Notification Email : "
+read -e Email
+echo -n "Email Password : "
+read -e mailpass
+echo "-----------------------------------------------------"
+echo "NginxURL : $NginxURL"
+echo "SNMPLocation : $SNMPLocation"
+echo "Notification Email : $Email"
+echo "Email Password : $mailpass"
+echo "-----------------------------------------------------"
 echo -n "Configure above URL for your base URL (y/Y yes) : "
 read -e VAR1
   if [ "$VAR1" == "y" ] || [ "$VAR1" == "Y" ]; then
@@ -33,6 +42,8 @@ echo "-----------------------------------------------------"
 echo "Host IP : $HostIP"
 echo "Nginx Server Name : $NginxURL"
 echo "SNMP Location : $SNMPLocation"
+echo "Notification Email : $Email"
+echo "Email Password : $mailpass"
 echo "-----------------------------------------------------"
 echo "The above information will be used for Post Installation ..."
 
