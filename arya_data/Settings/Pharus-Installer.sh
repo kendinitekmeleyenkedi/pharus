@@ -40,18 +40,18 @@ echo "
 |_|     |_| |_\_____|_|   |____/(___/ 
                                       
                              Arya-IT™"
-#while :
-#do
-#echo -n "Notification Email : "
-#read -e Email
-#echo -n "Email Password : "
-#read -e mailpass
-#echo -n "Configure above Information (y/Y yes) : "
-#read -e VAR1
-#  if [ "$VAR1" == "y" ] || [ "$VAR1" == "Y" ]; then
-#    break
-#  fi
-#done
+while :
+do
+echo -n "Notification Email : "
+read -e Email
+echo -n "Email Password : "
+read -e mailpass
+echo -n "Configure above Information (y/Y yes) : "
+read -e VAR1
+  if [ "$VAR1" == "y" ] || [ "$VAR1" == "Y" ]; then
+    break
+  fi
+done
 
 echo "-----------------------------------------------------"
 echo "Email : $Email"
