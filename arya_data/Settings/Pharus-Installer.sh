@@ -30,38 +30,6 @@ sed -i "s|\['db_pass'\].*|\['db_pass'\] = '$randpw';|" /opt/pharus/config.php
 sed -i "s|\['db_user'\].*|\['db_user'\] = 'pharus';|" /opt/pharus/config.php
 sed -i "s|\['db_name'\].*|\['db_name'\] = 'pharus';|" /opt/pharus/config.php
 
-### Mail Settings
-echo "
- ______  _                            
-(_____ \| |                           
- _____) ) |__  _____  ____ _   _  ___ 
-|  ____/|  _ \(____ |/ ___) | | |/___)
-| |     | | | / ___ | |   | |_| |___ |
-|_|     |_| |_\_____|_|   |____/(___/ 
-                                      
-                             Arya-IT™"
-while :
-do
-echo -n "Notification Email : "
-read -e Email
-echo -n "Email Password : "
-read -e mailpass
-echo -n "Configure above Information (y/Y yes) : "
-read -e VAR1
-  if [ "$VAR1" == "y" ] || [ "$VAR1" == "Y" ]; then
-    break
-  fi
-done
-
-echo "-----------------------------------------------------"
-echo "Email : $Email"
-echo "Email Password : $mailpass"
-echo "-----------------------------------------------------"
-echo "The above information will be used ..."
-sed -i "s|\['email_smtp_username'\].*|\['email_smtp_username'\] = '$Email';|" /opt/pharus/config.php
-sed -i "s|\['email_smtp_password'\].*|\['email_smtp_password'\] = '$mailpass';|" /opt/pharus/config.php
-
-
 ### Permission
 chown -R pharus:pharus /opt/pharus
 chmod 771 /opt/pharus
