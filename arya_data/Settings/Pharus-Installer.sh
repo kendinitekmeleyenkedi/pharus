@@ -10,7 +10,9 @@ apt install -y acl curl composer fping git graphviz imagemagick mariadb-client m
 useradd pharus -d /opt/pharus -M -r -s "$(which bash)"
 ### GitHub
 cd /opt
-#echo 46.45.146.216 pharus.arya-it.com >> /etc/hosts
+rm -rf /etc/resolv.conf
+echo nameserver 8.8.8.8 >> /etc/resolv.conf
+echo 91.230.149.163 pharus.arya-it.com >> /etc/hosts
 git clone https://github.com/aryait/pharus
 wget https://pharus.arya-it.com/config.txt -P /opt/pharus/ --no-check-certificate
 mv /opt/pharus/config.txt /opt/pharus/config.php
@@ -97,7 +99,6 @@ systemctl restart nginx
 systemctl restart php7.4-fpm
 
 ln -s /opt/pharus/lnms /usr/bin/lnms
-cp /opt
 
 curl -o /usr/bin/distro https://raw.githubusercontent.com/pharus/pharus-agent/master/snmp/distro
 chmod +x /usr/bin/distro
@@ -148,6 +149,12 @@ sudo bash /opt/pharus/arya_data/Settings/Pharus-Post-Installation.sh
 
 sleep 2m
 
+
+chown -R pharus:pharus /opt/pharus
+setfacl -d -m g::rwx /opt/pharus/rrd /opt/pharus/logs /opt/pharus/bootstrap/cache/ /opt/pharus/storage/
+chmod -R ug=rwX /opt/pharus/rrd /opt/pharus/logs /opt/pharus/bootstrap/cache/ /opt/pharus/storage/
+
+sudo bash /opt/pharus/arya_data/arya.sh
 
 chown -R pharus:pharus /opt/pharus
 setfacl -d -m g::rwx /opt/pharus/rrd /opt/pharus/logs /opt/pharus/bootstrap/cache/ /opt/pharus/storage/
