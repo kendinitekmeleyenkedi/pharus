@@ -89,7 +89,7 @@ sudo -u pharus bash << EOF
 EOF
 
 #####mysql -u pharus -p"$randpw" </opt/pharus/arya_data/Settings/mariadb/sql2.sql ##9##
-mysql -u pharus -p"Xqfa2tXQ" </opt/pharus/arya_data/Settings/mariadb/sql2.sql ##9##
+mysql -u root -p"Xqfa2tXQ" </opt/pharus/arya_data/Settings/mariadb/sql2.sql ##9##
 
 sudo cp /opt/pharus/misc/lnms-completion.bash /etc/bash_completion.d/
 
