@@ -59,6 +59,8 @@
                     <td>{{ $version_rrdtool }}</td>
                 </tr>
             </table>
+          
+<img class="logon-logo img-responsive" src="https://pharus.arya-it.com/images/custom/Arya_IT_logo_motto.png">
 
           <h3>{{ __('LibreNMS is a community-based project') }}</h3>
           <p>
