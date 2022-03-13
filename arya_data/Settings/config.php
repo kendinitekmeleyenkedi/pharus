@@ -21,7 +21,7 @@ $config['fping'] = "/usr/bin/fping";
 $config['fping_options']['timeout'] = 500;
 $config['fping_options']['count']   = 5;
 $config['fping_options']['interval'] = 500;
-$config['icmp_check'] = false;
+$config['icmp_check'] = true;
 
 //## RRDCACHED IpDegistir.
 $config[‘rrdcached’] = '10.255.255.254:42217';
